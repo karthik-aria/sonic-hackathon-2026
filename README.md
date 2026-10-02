@@ -49,27 +49,13 @@ From a laptop:
 ```bash
 ssh -L 8099:127.0.0.1:8099 admin@<switch>
 ```
-
 Then open the HTTP endpoint at `http://127.0.0.1:8099`.
 
-## Build locally without Docker
+Sample Screenshots
 
-A native build needs the same system dependencies the Docker builder installs:
+<img width="1237" height="834" alt="Screenshot 2026-10-01 at 9 22 31 PM" src="https://github.com/user-attachments/assets/d8bc5170-3e63-4f90-a223-b1f194a305fd" />
 
-```bash
-sudo apt-get install -y cmake libpcre2-dev
-cargo build --locked --release -p config_analyzer_service
-```
+<img width="1707" height="817" alt="Screenshot 2026-10-01 at 9 22 42 PM" src="https://github.com/user-attachments/assets/ee00c783-2f22-4cbe-a8e6-3ef2f13d09a4" />
 
-The binary accepts flags for the Redis `database_config.json` (`--db-config`),
-YANG model directory (`--yang`), pipeline file (`--pipelines`), and listen
-address (`--listen`); see `--help` for the full list and defaults.
 
-## Troubleshooting
 
-- **`Could NOT find PCRE2` during build** — install `libpcre2-dev` (the Docker
-  build handles this automatically).
-- **`Unable to use search directory "/usr/models/yang"`** — the YANG model
-  directory is missing. On a switch the service unit expects models at
-  `/usr/local/yang-models` (`CONFIG_ANALYZER_YANG_HOST_DIR` in
-  `packaging/config-analyzer.service`).
