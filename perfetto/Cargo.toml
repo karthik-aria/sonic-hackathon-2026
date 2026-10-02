@@ -1,0 +1,18 @@
+[package]
+edition.workspace = true
+name = "config_analyzer_perfetto"
+publish.workspace = true
+rust-version.workspace = true
+version = "0.1.0"
+
+[dependencies]
+config_analyzer_core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+rstest = { workspace = true }
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

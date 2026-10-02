@@ -1,0 +1,17 @@
+[package]
+edition.workspace = true
+name = "config_analyzer_pipeline_manager"
+publish.workspace = true
+rust-version.workspace = true
+version = "0.1.0"
+
+[dependencies]
+config_analyzer_core = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+rstest = { workspace = true }
+
+[lints]
+workspace = true

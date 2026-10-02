@@ -1,0 +1,22 @@
+[package]
+edition.workspace = true
+name = "config_analyzer_replay"
+publish.workspace = true
+rust-version.workspace = true
+version = "0.1.0"
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true }
+config_analyzer_core = { workspace = true }
+config_analyzer_loader = { workspace = true }
+config_analyzer_perfetto = { workspace = true }
+config_analyzer_pipeline_manager = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

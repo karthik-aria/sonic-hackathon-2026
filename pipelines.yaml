@@ -1,0 +1,31 @@
+# Pipelines the analyzer tracks, as data rather than code.
+#
+# Each entry names a CONFIG_DB list in an upstream SONiC YANG module. Everything the YANG
+# already says is read from it: the CONFIG table (the list's parent container), the key leaves,
+# the field names in schema order, and a `@` alias for every leaf-list. Everything the YANG does
+# not describe is here.
+#
+# name           pipeline name, used as `Pipeline::name` and on trace rows
+# yang.module    YANG module to load; the file must be in the directory given by --yang
+# yang.list      path to the list whose entries are tracked
+# appl_table     APPL_DB table the producer writes, without the leading `_`
+# not_forwarded  leaves of the list that the producer does not forward to APPL_DB. A field that
+#                is written to CONFIG_DB but never forwarded would otherwise be reported as
+#                pending forever, so list it here
+# asic_objects   SAI object types written to ASIC_DB for one key, in order; the index of each is
+#                its `SlotIdx` on trace rows. Empty when the table has no ASIC objects
+# object_names   which `ObjectMap` names belong to the pipeline: `prefix`, and `digits` when the
+#                prefix must be followed by one or more ASCII digits
+pipelines:
+  - name: port
+    yang:
+      module: sonic-port
+      list: /sonic-port:sonic-port/PORT/PORT_LIST
+    appl_table: PORT_TABLE
+    not_forwarded: []
+    asic_objects:
+      - SAI_OBJECT_TYPE_PORT
+      - SAI_OBJECT_TYPE_ROUTER_INTERFACE
+    object_names:
+      prefix: Ethernet
+      digits: true

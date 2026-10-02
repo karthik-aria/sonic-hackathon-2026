@@ -1,0 +1,19 @@
+[package]
+edition.workspace = true
+name = "config_analyzer_loader"
+publish.workspace = true
+rust-version.workspace = true
+version = "0.1.0"
+
+[dependencies]
+config_analyzer_pipeline_manager = { workspace = true }
+serde = { workspace = true }
+serde-saphyr = { workspace = true }
+thiserror = { workspace = true }
+yang3 = { features = ["bundled"], workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

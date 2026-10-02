@@ -1,0 +1,16 @@
+[Unit]
+Description=Config analyzer trace service
+After=docker.service database.service
+Requires=docker.service
+
+[Service]
+Environment=CONFIG_ANALYZER_YANG_HOST_DIR=/usr/local/yang-models
+ExecStartPre=/usr/bin/test -d ${CONFIG_ANALYZER_YANG_HOST_DIR}
+ExecStartPre=-/usr/bin/docker rm -f config-analyzer
+ExecStart=/usr/bin/docker run --rm --name config-analyzer --network host -v /var/run/redis:/var/run/redis -v /run/redis/auth:/run/redis/auth:ro -v ${CONFIG_ANALYZER_YANG_HOST_DIR}:/usr/models/yang:ro config-analyzer:hackathon --listen 0.0.0.0:8099 --yang /usr/models/yang --pipelines /etc/config-analyzer/pipelines.yaml
+ExecStop=/usr/bin/docker stop config-analyzer
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
